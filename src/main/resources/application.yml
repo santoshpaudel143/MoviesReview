@@ -1,0 +1,15 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: movie_review
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/movie_review
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
