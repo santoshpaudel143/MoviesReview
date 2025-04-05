@@ -41,7 +41,10 @@ public class MovieRequestPojo {
 
     public String getYear() {
         try {
-            return year.substring(0, 4);
+            String years = this.year.substring(0, 4);
+            if (year.contains("I"))
+                years = year.substring(this.year.length() - 4);
+            return years;
         } catch (Exception e) {
             return "0001";
         }
@@ -49,7 +52,7 @@ public class MovieRequestPojo {
 
     public BigDecimal getRatingValue() {
         try {
-             return new BigDecimal(ratingValue).setScale(1, RoundingMode.HALF_UP);
+            return new BigDecimal(ratingValue).setScale(1, RoundingMode.HALF_UP);
         } catch (NumberFormatException e) {
             return new BigDecimal(0);
         }

@@ -1,3 +1,10 @@
+CREATE TABLE public.movie_genre (
+                                    id int4 NOT NULL,
+                                    genre_name varchar(255) NOT NULL,
+                                    CONSTRAINT movie_genre_pkey PRIMARY KEY (id),
+                                    CONSTRAINT uk_movie_genre_name UNIQUE (genre_name)
+);
+
 
 insert into movie_genre(id, genre_name)values(nextval('movie_genre_seq'),'Music');
 insert into movie_genre(id, genre_name)values(nextval('movie_genre_seq'),'History');
