@@ -13,7 +13,8 @@ import java.util.Optional;
  * @Author: Santosh Paudel
  */
 public interface MoviesRepo extends JpaRepository<Movies, Integer> {
-    @Query(value = "select m.*, json_agg(genre_name) \n" +
+    @Query(value = "select m.id, m.imdb_id as \"imdbId\", m.movie_name as \"movieName\", m.poster_url as \"posterUrl\", m.rating,\n" +
+            "m.released_year as \"releasedYear\", m.runtime, json_agg(genre_name) as genre\n" +
             "from movies m \n" +
             "join movie_genre_mapping mgm on mgm.movie_id = m.id\n" +
             "join movie_genre mg on mg.id = mgm.genre_id\n" +
