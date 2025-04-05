@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: Santosh Paudel
@@ -35,13 +36,20 @@ public class MoviesController extends BaseController {
 
     @GetMapping("{id}")
     public ResponseEntity<GlobalApiResponse> getMovieById(@PathVariable Integer id) {
-        return ResponseEntity.ok(successResponse(moduleName + FETCHED_SUCCESS,
-                moviesService.getMovieById(id)));
+        Map<String, Object> movieReview = moviesService.getMovieById(id);
+        if (movieReview == null || movieReview.isEmpty())
+                return ResponseEntity.ok(errorResponse(moduleName + "not found"));
+        else
+            return ResponseEntity.ok(successResponse(moduleName + FETCHED_SUCCESS, movieReview));
+
     }
 
     @GetMapping("/pageable")
     public ResponseEntity<GlobalApiResponse> getMoviePageable(MovieFilterRequestPojo movieFilterRequestPojo) {
-        return ResponseEntity.ok(successResponse(moduleName + FETCHED_SUCCESS,
-                moviesService.getMoviePageable(movieFilterRequestPojo)));
+        List<Map<String, Object>> movieList = moviesService.getMoviePageable(movieFilterRequestPojo);
+        if (movieList == null || movieList.isEmpty())
+            return ResponseEntity.ok(errorResponse(moduleName + "not found"));
+        else
+            return ResponseEntity.ok(successResponse(moduleName + FETCHED_SUCCESS, movieList));
     }
 }

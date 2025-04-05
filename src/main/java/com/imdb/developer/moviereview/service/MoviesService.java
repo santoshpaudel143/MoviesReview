@@ -5,6 +5,7 @@ import com.imdb.developer.moviereview.pojo.MovieRequestPojo;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: Santosh Paudel
@@ -12,7 +13,7 @@ import java.util.List;
 public interface MoviesService {
     void addMovies(@Valid List<MovieRequestPojo> movieRequestPojo);
 
-    Object getMovieById(Integer id);
+    Map<String,Object> getMovieById(Integer id);
 
-    Object getMoviePageable(MovieFilterRequestPojo movieFilterRequestPojo);
+    List<Map<String,Object>> getMoviePageable(MovieFilterRequestPojo movieFilterRequestPojo);
 }

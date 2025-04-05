@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Year;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +29,8 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public void addMovies(List<MovieRequestPojo> requestPojoList) {
+        if (requestPojoList == null || requestPojoList.isEmpty())
+            throw new IllegalArgumentException("movie request not found");
         moviesRepo.saveAll(requestPojoList.stream()
                 .map(requestPojo -> Movies
                         .builder()
@@ -43,12 +46,12 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public Object getMovieById(Integer id) {
+    public Map<String, Object> getMovieById(Integer id) {
         return moviesRepo.getMovieById(id).orElse(null);
     }
 
     @Override
-    public Object getMoviePageable(MovieFilterRequestPojo requestPojo) {
+    public List<Map<String, Object>> getMoviePageable(MovieFilterRequestPojo requestPojo) {
         return moviesRepo.getMoviesPageable(requestPojo.getImdbId(), requestPojo.getMovieName(), requestPojo.getReleasedYear(),
                 requestPojo.getRating(), requestPojo.getPage(), requestPojo.getRow());
     }
