@@ -30,15 +30,18 @@ public class MoviesController extends BaseController {
 
     @PostMapping
     public ResponseEntity<GlobalApiResponse> addMovies(@RequestBody @Valid List<MovieRequestPojo> movieRequestPojo) {
-        moviesService.addMovies(movieRequestPojo);
-        return ResponseEntity.ok(successResponse(moduleName + "added successfully", null));
+        boolean status = moviesService.addMovies(movieRequestPojo);
+        if (status)
+            return ResponseEntity.ok(successResponse(moduleName + "added successfully", null));
+        else
+            return ResponseEntity.ok(errorResponse("failed to add " + moduleName));
     }
 
     @GetMapping("{id}")
     public ResponseEntity<GlobalApiResponse> getMovieById(@PathVariable Integer id) {
         Map<String, Object> movieReview = moviesService.getMovieById(id);
         if (movieReview == null || movieReview.isEmpty())
-                return ResponseEntity.ok(errorResponse(moduleName + "not found"));
+            return ResponseEntity.ok(errorResponse(moduleName + "not found"));
         else
             return ResponseEntity.ok(successResponse(moduleName + FETCHED_SUCCESS, movieReview));
 

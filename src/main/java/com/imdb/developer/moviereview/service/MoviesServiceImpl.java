@@ -28,9 +28,9 @@ public class MoviesServiceImpl implements MoviesService {
     private final MovieGenreRepo movieGenreRepo;
 
     @Override
-    public void addMovies(List<MovieRequestPojo> requestPojoList) {
+    public boolean addMovies(List<MovieRequestPojo> requestPojoList) {
         if (requestPojoList == null || requestPojoList.isEmpty())
-            throw new IllegalArgumentException("movie request not found");
+            return false;
         moviesRepo.saveAll(requestPojoList.stream()
                 .map(requestPojo -> Movies
                         .builder()
@@ -43,6 +43,7 @@ public class MoviesServiceImpl implements MoviesService {
                         .movieGenres(this.getMovieGenres(requestPojo.getGenre()))
                         .build())
                 .collect(Collectors.toList()));
+        return true;
     }
 
     @Override

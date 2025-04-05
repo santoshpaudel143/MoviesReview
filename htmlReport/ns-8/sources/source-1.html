@@ -1,0 +1,120 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Movies</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.imdb.developer.moviereview.enitty</a>
+</div>
+
+<h1>Coverage Summary for Class: Movies (com.imdb.developer.moviereview.enitty)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">Movies$HibernateInstantiator$5zwnbKno</td>
+  </tr>
+  <tr>
+    <td class="name">Movies$HibernateProxy$4OphgsFU</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.imdb.developer.moviereview.enitty;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.time.Year;
+&nbsp;import java.util.Collection;
+&nbsp;
+&nbsp;/**
+&nbsp; * @Author: Santosh Paudel
+&nbsp; */
+&nbsp;
+&nbsp;@Table(name = &quot;movies&quot;, uniqueConstraints = @UniqueConstraint(name = &quot;uk_movies_imdb_id&quot;, columnNames = &quot;imdbId&quot;))
+&nbsp;@Entity
+&nbsp;@Getter
+&nbsp;@Setter
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class Movies {
+&nbsp;    @Id
+&nbsp;    @SequenceGenerator(sequenceName = &quot;movies_seq&quot;, name = &quot;movies_gen&quot;, allocationSize = 1)
+&nbsp;    @GeneratedValue(generator = &quot;movies_gen&quot;, strategy = GenerationType.SEQUENCE)
+&nbsp;    private Integer id;
+&nbsp;    @Column(name = &quot;imdb_id&quot;, nullable = false)
+&nbsp;    private String imdbId;
+&nbsp;    private String movieName;
+&nbsp;    private Year releasedYear;
+&nbsp;    @Column(columnDefinition = &quot;int default 0&quot;)
+&nbsp;    private int runtime; // in minutes
+&nbsp;    @Column(columnDefinition = &quot;numeric default 0.0&quot;)
+&nbsp;    private BigDecimal rating;
+&nbsp;    private String posterUrl;
+&nbsp;
+&nbsp;    @ManyToMany
+&nbsp;    @JsonIgnore
+&nbsp;    @JoinTable(name = &quot;movie_genre_mapping&quot;,
+&nbsp;            foreignKey = @ForeignKey(name = &quot;FK_movie_genre_mapping_movie_id&quot;),
+&nbsp;            joinColumns = @JoinColumn(name = &quot;movie_id&quot;, referencedColumnName = &quot;id&quot;),
+&nbsp;            inverseForeignKey = @ForeignKey(name = &quot;FK_movie_genre_genre_id&quot;),
+&nbsp;            inverseJoinColumns = @JoinColumn(name = &quot;genre_id&quot;, referencedColumnName = &quot;id&quot;),
+&nbsp;            uniqueConstraints = @UniqueConstraint(name = &quot;UK_movie_genre_id&quot;, columnNames = {&quot;movie_id&quot;, &quot;genre_id&quot;}))
+&nbsp;    private Collection&lt;MovieGenre&gt; movieGenres;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-06 00:46</div>
+</div>
+</body>
+</html>

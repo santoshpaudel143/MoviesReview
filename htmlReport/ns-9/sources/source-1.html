@@ -1,0 +1,84 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MovieGenreRepo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.imdb.developer.moviereview.repo</a>
+</div>
+
+<h1>Coverage Summary for Class: MovieGenreRepo (com.imdb.developer.moviereview.repo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MovieGenreRepo</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.imdb.developer.moviereview.repo;
+&nbsp;
+&nbsp;import com.imdb.developer.moviereview.enitty.MovieGenre;
+&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * @Author: Santosh Paudel
+&nbsp; */
+&nbsp;public interface MovieGenreRepo extends JpaRepository&lt;MovieGenre, Integer&gt; {
+&nbsp;
+&nbsp;    @Query(value = &quot;select * from movie_genre where lower(genre_name) in (?1)&quot;, nativeQuery = true)
+&nbsp;    List&lt;MovieGenre&gt; getMovieGenresByGenreNames(List&lt;String&gt; genreName);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-06 00:46</div>
+</div>
+</body>
+</html>

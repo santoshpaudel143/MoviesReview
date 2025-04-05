@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MoviesRepo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.imdb.developer.moviereview.repo</a>
+</div>
+
+<h1>Coverage Summary for Class: MoviesRepo (com.imdb.developer.moviereview.repo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MoviesRepo</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.imdb.developer.moviereview.repo;
+&nbsp;
+&nbsp;import com.imdb.developer.moviereview.enitty.Movies;
+&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;/**
+&nbsp; * @Author: Santosh Paudel
+&nbsp; */
+&nbsp;public interface MoviesRepo extends JpaRepository&lt;Movies, Integer&gt; {
+&nbsp;    @Query(value = &quot;select m.*, json_agg(genre_name) \n&quot; +
+&nbsp;            &quot;from movies m \n&quot; +
+&nbsp;            &quot;join movie_genre_mapping mgm on mgm.movie_id = m.id\n&quot; +
+&nbsp;            &quot;join movie_genre mg on mg.id = mgm.genre_id\n&quot; +
+&nbsp;            &quot;where m.id =?1\n&quot; +
+&nbsp;            &quot;group by m.id order by m.id desc&quot;, nativeQuery = true)
+&nbsp;    Optional&lt;Map&lt;String,Object&gt;&gt; getMovieById(Integer id);
+&nbsp;
+&nbsp;    @Query(value = &quot;select m.id, m.imdb_id as \&quot;imdbId\&quot;, m.movie_name as \&quot;movieName\&quot;, m.poster_url as \&quot;posterUrl\&quot;, m.rating,\n&quot; +
+&nbsp;            &quot;m.released_year as \&quot;releasedYear\&quot;, m.runtime, json_agg(genre_name) as genre\n&quot; +
+&nbsp;            &quot;from movies m \n&quot; +
+&nbsp;            &quot;join movie_genre_mapping mgm on mgm.movie_id = m.id\n&quot; +
+&nbsp;            &quot;join movie_genre mg on mg.id = mgm.genre_id\n&quot; +
+&nbsp;            &quot;where case when ?1 = &#39;0&#39; then true else m.imdb_id =?1 end\n&quot; +
+&nbsp;            &quot;and case when ?2 = &#39;0&#39; then true else m.movie_name ilike &#39;%&#39; || ?2 || &#39;%&#39; end\n&quot; +
+&nbsp;            &quot;and case when ?3 = &#39;0&#39; then true else cast(m.released_year as varchar) &gt;= ?3 end\n&quot; +
+&nbsp;            &quot;and case when ?4 = 0 then true else m.rating &gt;= ?4 end\n&quot; +
+&nbsp;            &quot;group by m.id order by m.id desc\n&quot; +
+&nbsp;            &quot;offset ?5 limit ?6&quot;, nativeQuery = true)
+&nbsp;    List&lt;Map&lt;String,Object&gt;&gt; getMoviesPageable(String imdbId, String movieName, String releasedYear, BigDecimal rating, int page, int row);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-06 00:46</div>
+</div>
+</body>
+</html>

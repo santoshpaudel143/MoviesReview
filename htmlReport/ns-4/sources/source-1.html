@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MovieRequestPojo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.imdb.developer.moviereview.pojo</a>
+</div>
+
+<h1>Coverage Summary for Class: MovieRequestPojo (com.imdb.developer.moviereview.pojo)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MovieRequestPojo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.imdb.developer.moviereview.pojo;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+&nbsp;import jakarta.validation.constraints.NotBlank;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.math.RoundingMode;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * @Author: Santosh Paudel
+&nbsp; */
+&nbsp;
+&nbsp;@Getter
+&nbsp;@Setter
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class MovieRequestPojo {
+&nbsp;    @NotBlank
+&nbsp;    @JsonProperty(&quot;ImdbId&quot;)
+&nbsp;    private String imdbId;
+&nbsp;    @NotBlank
+&nbsp;    private String name;
+&nbsp;    @JsonProperty(&quot;poster_url&quot;)
+&nbsp;    private String posterUrl;
+&nbsp;    @NotBlank
+&nbsp;    private String year;
+&nbsp;    private String runtime;
+&nbsp;    private List&lt;String&gt; genre;
+&nbsp;    private String ratingValue;
+&nbsp;
+&nbsp;    public int getRuntime() {
+&nbsp;        try {
+<b class="fc">&nbsp;            return Integer.parseInt(runtime.replaceAll(&quot;min&quot;, &quot;&quot;).trim());</b>
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getYear() {
+&nbsp;        try {
+<b class="fc">&nbsp;            return year.substring(0, 4);</b>
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            return &quot;0001&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public BigDecimal getRatingValue() {
+&nbsp;        try {
+<b class="fc">&nbsp;             return new BigDecimal(ratingValue).setScale(1, RoundingMode.HALF_UP);</b>
+&nbsp;        } catch (NumberFormatException e) {
+<b class="nc">&nbsp;            return new BigDecimal(0);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-06 00:46</div>
+</div>
+</body>
+</html>

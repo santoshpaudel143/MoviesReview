@@ -11,7 +11,7 @@ import java.util.Map;
  * @Author: Santosh Paudel
  */
 public interface MoviesService {
-    void addMovies(@Valid List<MovieRequestPojo> movieRequestPojo);
+    boolean addMovies(@Valid List<MovieRequestPojo> movieRequestPojo);
 
     Map<String,Object> getMovieById(Integer id);
 

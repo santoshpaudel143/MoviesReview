@@ -1,0 +1,99 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MovieGenre</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.imdb.developer.moviereview.enitty</a>
+</div>
+
+<h1>Coverage Summary for Class: MovieGenre (com.imdb.developer.moviereview.enitty)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">MovieGenre$HibernateInstantiator$LhXeCwn3</td>
+  </tr>
+  <tr>
+    <td class="name">MovieGenre$HibernateProxy$7PEJYDRv</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.imdb.developer.moviereview.enitty;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * @Author: Santosh Paudel
+&nbsp; */
+&nbsp;
+&nbsp;@Table(name = &quot;movie_genre&quot;, uniqueConstraints = @UniqueConstraint(name = &quot;uk_movie_genre_name&quot;, columnNames = &quot;genre_name&quot;))
+&nbsp;@Entity
+&nbsp;@Getter
+&nbsp;@Setter
+&nbsp;@AllArgsConstructor
+&nbsp;@NoArgsConstructor
+&nbsp;@Builder
+&nbsp;public class MovieGenre {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @SequenceGenerator(sequenceName = &quot;movie_genre_seq&quot;, name = &quot;movie_genre_gen&quot;, allocationSize = 1)
+&nbsp;    @GeneratedValue(generator = &quot;movie_genre_gen&quot;, strategy = GenerationType.SEQUENCE)
+&nbsp;    private Integer id;
+&nbsp;    @Column(name = &quot;genre_name&quot;, nullable = false)
+&nbsp;    private String genreName;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-06 00:46</div>
+</div>
+</body>
+</html>
